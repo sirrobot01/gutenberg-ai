@@ -15,9 +15,9 @@ from app.services import Services
 
 
 class Settings(BaseSettings):
-    llm_type: str = "openai"
-    llm_token: str
-    request_per_minute: int = 10
+    LLM_TYPE: str = "openai"
+    LLM_TOKEN: str
+    REQUEST_PER_MINUTE: int = 10
 
     class Config:
         # Get env file from base directory
@@ -34,7 +34,7 @@ def get_settings() -> Settings:
 def get_services(
     db: AsyncSession = Depends(get_db), settings: Settings = Depends(get_settings)
 ) -> Services:
-    return Services(db, settings.llm_type, settings.llm_token)
+    return Services(db, settings.LLM_TYPE, settings.LLM_TOKEN)
 
 
 app = FastAPI()
@@ -54,7 +54,7 @@ async def rate_limit(request: Request):
     ]
 
     # Check if too many requests
-    if len(rate_limit_store[client_ip]) >= settings.request_per_minute:
+    if len(rate_limit_store[client_ip]) >= settings.REQUEST_PER_MINUTE:
         raise HTTPException(status_code=429, detail="Too many requests")
 
     # Add current request
