@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h1 class="text-3xl font-bold mb-4 text-gray-800">Enter a Project Gutenberg Book ID</h1>
+    <form 
+        hx-post="/fetch_book" 
+        hx-target="#book-detail" 
+        hx-swap="innerHTML" 
+        hx-indicator="#fetch-button" 
+        class="flex space-x-2 items-center"
+    >
+        <input 
+            type="text" 
+            name="book_id" 
+            class="border border-gray-300 rounded p-2 flex-grow focus:outline-none focus:ring-2 focus:ring-blue-500" 
+            placeholder="e.g., 1342" 
+            required
+        >
+        <button 
+            id="fetch-button"
+            type="submit"
+            class="relative bg-blue-600 hover:bg-blue-700 text-white font-semibold p-2 rounded shadow flex items-center justify-center w-32"
+        >
+            <span class="button-text">Fetch Book</span>
+            <span class="button-spinner hidden ml-2">
+                <div class="border-4 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></div>
+            </span>
+        </button>
+    </form>
+    <div id="book-detail" class="mt-6 text-gray-800"></div>
+</div>
+
+<style>
+    #fetch-button.htmx-request .button-text {
+        display: none;
+    }
+    #fetch-button.htmx-request .button-spinner {
+        display: inline-block;
+    }
+</style>
+{% endblock %}

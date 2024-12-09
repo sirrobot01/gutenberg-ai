@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-6xl mx-auto mt-10 p-4">
+    <h1 class="text-3xl font-bold mb-6 text-gray-800">Books</h1>
+    {% if books %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for book in books %}
+        <div class="bg-white rounded shadow p-4 flex flex-col justify-between">
+            <div>
+                <h2 class="text-xl font-semibold text-gray-900 mb-2">{{ book.title }}</h2>
+                {% if book.authors %}
+                <p class="text-gray-700 mb-1"><span class="font-semibold">Authors:</span> {{ book.authors }}</p>
+                {% endif %}
+                {% if book.publisher %}
+                <p class="text-gray-700 mb-1"><span class="font-semibold">Publisher:</span> {{ book.publisher }}</p>
+                {% endif %}
+                {% if book.issued %}
+                <p class="text-gray-700 mb-1"><span class="font-semibold">Issued:</span> {{ book.issued }}</p>
+                {% endif %}
+                {% if book.languages %}
+                <p class="text-gray-700 mb-1"><span class="font-semibold">Language:</span> {{ book.languages }}</p>
+                {% endif %}
+            </div>
+            <div class="mt-4">
+                <a href="/book/{{ book.book_id }}"
+                   class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded inline-block text-center w-full">
+                   View Details
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-gray-700">No books found.</p>
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-3xl mx-auto mt-10 bg-white p-6 rounded shadow">
+    <h2 class="text-3xl font-bold mb-4 text-gray-800">{{ book.title }}</h2>
+    {% include "fragments/book_detail.html" %}
+</div>
+{% endblock %}

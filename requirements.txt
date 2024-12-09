@@ -1,0 +1,17 @@
+aiosqlite==0.20.0
+fastapi==0.115.6
+greenlet==3.1.1
+groq==0.13.0
+jinja2==3.1.4
+nltk==3.9.1
+openai==1.56.2
+pytest-asyncio==0.24.0
+pytest-mock==3.14.0
+python-dotenv==1.0.1
+python-multipart==0.0.19
+rdflib==7.1.1
+ruff==0.8.2
+sqlalchemy==2.0.36
+tiktoken==0.8.0
+uv==0.5.7
+uvicorn==0.32.1

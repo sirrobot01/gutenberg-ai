@@ -1,0 +1,84 @@
+<div class="max-w-3xl mx-auto p-4">
+    <h2 class="text-3xl font-bold mb-4">{{ book.title }}</h2>
+    <div class="bg-white shadow rounded-lg p-4 mb-6">
+        <div class="flex flex-wrap mb-2">
+            <span class="mr-2 font-semibold">Authors:</span>
+            <span>{{ book.authors }}</span>
+        </div>
+        <div class="flex flex-wrap mb-2">
+            <span class="mr-2 font-semibold">Languages:</span>
+            <span>{{ book.languages }}</span>
+        </div>
+        <div class="flex flex-wrap mb-2">
+            <span class="mr-2 font-semibold">Publisher:</span>
+            <span>{{ book.publisher }}</span>
+        </div>
+        <div class="flex flex-wrap mb-2">
+            <span class="mr-2 font-semibold">Issued:</span>
+            <span>{{ book.issued }}</span>
+        </div>
+        <div class="flex flex-wrap">
+            <span class="mr-2 font-semibold">Rights:</span>
+            <span>{{ book.rights }}</span>
+        </div>
+    </div>
+
+    <div class="flex space-x-2 mb-4">
+        <button 
+            hx-post="/analyze/{{ book.book_id }}" 
+            hx-vals='{"analysis_type": "summary"}' 
+            hx-target="#analysis-result" 
+            class="bg-green-600 hover:bg-green-700 text-white p-2 rounded shadow"
+        >
+            <span class="button-text">Get Summary</span>
+            <span class="button-spinner hidden ml-2">
+                <div class="border-4 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></div>
+            </span>
+        </button>
+        <button 
+            hx-post="/analyze/{{ book.book_id }}" 
+            hx-vals='{"analysis_type": "sentiment"}' 
+            hx-target="#analysis-result" 
+            class="bg-purple-600 hover:bg-purple-700 text-white p-2 rounded shadow"
+        >
+            <span class="button-text">Get Sentiment</span>
+            <span class="button-spinner hidden ml-2">
+                <div class="border-4 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></div>
+            </span>
+        </button>
+        <button 
+            hx-post="/analyze/{{ book.book_id }}" 
+            hx-vals='{"analysis_type": "key_characters"}' 
+            hx-target="#analysis-result"
+            hx-swap="innerHTML" 
+            class="bg-yellow-600 hover:bg-yellow-700 text-white p-2 rounded shadow"
+        >
+            <span class="button-text">Get Key Characters</span>
+            <span class="button-spinner hidden ml-2">
+                <div class="border-4 border-white border-t-transparent rounded-full w-5 h-5 animate-spin"></div>
+            </span>
+        </button>
+    </div>
+    <div id="analysis-result" class="p-4 border rounded bg-gray-50 min-h-[150px]">
+        <p class="text-center text-gray-500">Click any button above to fetch analysis.</p>
+    </div>
+
+    <div class="bg-white shadow rounded-lg p-4">
+        <h3 class="text-xl font-bold mb-4">Book Text:</h3>
+        <div class="max-h-96 overflow-y-auto p-4 border rounded bg-gray-50">
+            <pre class="whitespace-pre-wrap break-words">{{ book.text }}</pre>
+        </div>
+    </div>
+</div>
+
+<style>
+    .button-spinner {
+        display: none;
+    }
+    .htmx-request .button-text {
+        display: none;
+    }
+    .htmx-request .button-spinner {
+        display: inline-block;
+    }
+</style>
